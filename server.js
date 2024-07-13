@@ -21,7 +21,10 @@ app.use("/expense", expenseRouter);
 
 
 
-mongoose.connect(mongoUrl)
+mongoose.connect(mongoUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
     .then(() => {
         console.log("MongoDB is connected to the server");
     })
