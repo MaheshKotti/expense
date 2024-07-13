@@ -29,7 +29,7 @@ mongoose.connect(mongoUrl)
         console.log(`MongoDB connection failed due to ${err}`);
     })
 
-app.use("/", () => {
+app.use("/", (req, res) => {
     res.send("<h1> Welcome to Expense Tracker")
 })
 
