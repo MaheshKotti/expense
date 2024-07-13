@@ -29,7 +29,9 @@ mongoose.connect(mongoUrl)
         console.log(`MongoDB connection failed due to ${err}`);
     })
 
-
+app.use("/", () => {
+    res.send("<h1> Welcome to Expense Tracker")
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}...`)
