@@ -25,7 +25,7 @@ const addExpense = async (req, res) => {
         const savedExpense = await expense.save();
         user.expense.push(savedExpense);
         await user.save();
-        res.status(200).json(expense)
+        res.status(200).json({expense, userId:expense.user[0]._id})
 
     } catch (error) {
         commonFunction.errorMessage(res, error);
