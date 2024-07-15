@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/add-expense", validateToken, expenseController.addExpense);
 router.get("/all-expenses", expenseController.getExpenses)
 router.get("/getexpense/:expenseId", expenseController.getExpenseById);
+router.get("/getexpenses/:userId", expenseController.getExpenseByUserId);
 router.delete("/delete-expense/:expenseId", expenseController.deleteExpense);
 
 

@@ -60,6 +60,21 @@ const getExpenseById = async (req, res) => {
     }
 }
 
+const getExpenseByUserId = async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "No user found" });
+        }
+        const expenses = await Expense.find({user: userId});
+        res.status(200).json({ userName: user.userName, expenses })
+
+    } catch (error) {
+        commonFunction.errorMessage(res, error);
+    }
+}
+
 const deleteExpense = async (req, res) => {
     const expenseId = req.params.expenseId;
 
@@ -74,4 +89,4 @@ const deleteExpense = async (req, res) => {
     }
 }
 
-module.exports = { addExpense, getExpenseById, getExpenses, deleteExpense }
+module.exports = { addExpense, getExpenseById, getExpenseByUserId, getExpenses, deleteExpense }
