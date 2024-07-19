@@ -67,8 +67,9 @@ const getExpenseByUserId = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "No user found" });
         }
-        const expenses = await Expense.find({user: userId});
-        res.status(200).json({ userName: user.userName, expenses })
+        const expenses = await Expense.find({ user: userId });
+        let totalAmount = expenses.reduce((totalAmount, expense) => totalAmount + expense.amount, 0);
+        res.status(200).json({ userName: user.userName, expenses, totalAmount: totalAmount })
 
     } catch (error) {
         commonFunction.errorMessage(res, error);
