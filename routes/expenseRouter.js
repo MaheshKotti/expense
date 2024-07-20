@@ -9,6 +9,6 @@ router.get("/all-expenses", expenseController.getExpenses)
 router.get("/getexpense/:expenseId", expenseController.getExpenseById);
 router.get("/getexpenses/:userId", expenseController.getExpenseByUserId);
 router.delete("/delete-expense/:expenseId", expenseController.deleteExpense);
-
+router.put("/edit-expense/:expenseId", expenseController.EditExpenseById);
 
 module.exports = router;

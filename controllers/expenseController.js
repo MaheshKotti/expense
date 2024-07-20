@@ -73,6 +73,39 @@ const getExpenseByUserId = async (req, res) => {
 
     } catch (error) {
         commonFunction.errorMessage(res, error);
+        return
+    }
+}
+
+const EditExpenseById = async (req, res) => {
+
+    const { expenseTitle, amount, date, category, description } = req.body;
+
+    const expenseId = req.params.expenseId;
+    try {
+        const expense = await Expense.findById(expenseId);
+        if (!expense) {
+            return res.status(404).json({ error: "expense not found with the given id" });
+        }
+
+        const newExpense = await Expense.findByIdAndUpdate(
+            { _id: expense._id },
+            {
+                $set: {
+                    expenseTitle: expenseTitle,
+                    amount: amount,
+                    date: date,
+                    category: category,
+                    description: description
+                }
+            },
+            { new: true }
+        )
+        res.status(200).json({ message: "Expense Updated Successfully", newExpense })
+
+    } catch (error) {
+        commonFunction.errorMessage(res, error);
+        return
     }
 }
 
@@ -90,4 +123,4 @@ const deleteExpense = async (req, res) => {
     }
 }
 
-module.exports = { addExpense, getExpenseById, getExpenseByUserId, getExpenses, deleteExpense }
+module.exports = { addExpense, getExpenseById, getExpenseByUserId, getExpenses, deleteExpense, EditExpenseById }
