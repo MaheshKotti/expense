@@ -22,7 +22,7 @@ const expenseSchema = new mongoose.Schema({
         }
     ],
     description: {
-        trype: String
+        type: String,
     },
     user: [
         {
