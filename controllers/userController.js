@@ -73,7 +73,13 @@ const getUserById = async (req, res) => {
         if (!user) {
             return res.status(404).json({ info: "user not found with the given id" })
         }
-        res.status(200).json({ user });
+        res.status(200).json(
+            userDetails = {
+                _id: user._id,
+                userName: user.userName,
+                email: user.email
+            }
+        );
 
     } catch (error) {
         commonFunction.errorMessage(res, error);
