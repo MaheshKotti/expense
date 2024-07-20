@@ -94,7 +94,7 @@ const EditExpenseById = async (req, res) => {
                 $set: {
                     expenseTitle: expenseTitle,
                     amount: amount,
-                    date: date,
+                    date: new Date(date),
                     category: category,
                     description: description
                 }
