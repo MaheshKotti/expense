@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const userRouter = require('./routes/userRouter');
 const expenseRouter = require("./routes/expenseRouter");
 const endPointsRouter = require("./routes/endPointsRouter");
+const incomeRouter = require("./routes/incomeRouter");
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use("/user", userRouter);
 app.use("/expense", expenseRouter);
 app.use("/endpoints", endPointsRouter);
+app.use("/income", incomeRouter)
 
 
 
