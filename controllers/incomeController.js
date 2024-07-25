@@ -12,7 +12,7 @@ const addIncome = async (req, res) => {
         }
         const newIncome = new Income({
             incomeTitle,
-            amount: amount.toFixed(2),
+            amount: amount,
             date: new Date(date),
             category,
             description,

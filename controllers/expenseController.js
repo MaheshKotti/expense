@@ -16,7 +16,7 @@ const addExpense = async (req, res) => {
         }
         const expense = new Expense({
             expenseTitle,
-            amount: amount.toFixed(2),
+            amount: amount,
             date: new Date(date),
             category,
             description,
