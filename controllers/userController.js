@@ -124,7 +124,7 @@ const changePassword = async (req, res) => {
 }
 
 const updateUserDetailsById = async (req, res) => {
-    const { userName, email } = req.body;
+    const { userName, email, password } = req.body;
     const userId = req.params.userId;
 
     try {
@@ -132,6 +132,10 @@ const updateUserDetailsById = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "User not found with the given id" });
         };
+        const decodedPassword = await bcrypt.compare(password, user.password);
+        if (!user || !decodedPassword) {
+            return res.status(404).json({ error: "Incorrect password" })
+        }
 
         await User.findByIdAndUpdate(
             { _id: user._id },
