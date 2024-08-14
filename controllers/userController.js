@@ -93,6 +93,9 @@ const deleteUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ info: "User not found with the given id" })
         }
+        user.expense.splice(0, user.expense.length);
+        user.income.splice(0, user.income.length);
+        user.save()
         res.status(200).json(user)
 
     } catch (error) {
