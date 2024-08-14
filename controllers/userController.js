@@ -1,5 +1,7 @@
 const commonFunction = require('../commonFunctions/commonFunction');
 const User = require('../models/User');
+const Expense = require('../models/Expense');
+const Income = require('../models/Income');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -93,9 +95,11 @@ const deleteUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ info: "User not found with the given id" })
         }
-        user.expense.splice(0, user.expense.length);
-        user.income.splice(0, user.income.length);
-        user.save()
+        Expense.deleteMany({ _id: { $in: user.expense } });
+        Income.deleteMany({ _id: { $in: user.income } });
+        // user.expense.splice(0, user.expense.length);
+        // user.income.splice(0, user.income.length);
+        // user.save()
         res.status(200).json(user)
 
     } catch (error) {
